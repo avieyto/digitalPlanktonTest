@@ -1,0 +1,335 @@
+{
+	"info": {
+		"_postman_id": "dd12b86f-f9e3-44b9-8d15-e1086065a801",
+		"name": "DigitalPlaktonTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "testing@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "testing@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Testing Customer",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "GetNotifications",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGQ5ZWFhZjlmNDkyMjVkMDAxNGQ4ZTk0NGMwNzczYWI5MTdiMWFhZTY5ZjNjYzNlOTVmMzE1MzU1NmIzN2RmMWY2NjFhOWU0OGFiNzg3NGYiLCJpYXQiOjE2MDE0ODI0MTUsIm5iZiI6MTYwMTQ4MjQxNSwiZXhwIjoxNjA0MDc0NDE0LCJzdWIiOiIzMDciLCJzY29wZXMiOltdfQ.gI530nX7zyD5cex8D2RGHQ0oLZ4HAFVPcmsfzvnTb02r9hfB1zcC2w1YB0k8yn3VlXHYZKZ8OrpY2wOnF15d08EpAhjh9sRScOJ0LyurGf7k8WbQ51A7DZm87kwe0zxKBKaPzeNdiVq2S72E5HNKjmEM91E4EezqJ_y1q5iOwHYnpQ6inyw_IWamJHBDlKgjhZOJ0BXP-o2k3LCvu0dQcLLG5LP7TQndGK1kMz2Oy--QtEbxa0aVxMto6IYxls521yLklJvnKbvTImAmA2FpLVzp8ltC7MCK6hmVE4RJ3J-1etKWKR3gfj4VBAwB4Jx9dXV2jFyVN08rPwn26boBkSOUWv84TCd3zgMeRE9z5OXRbGq948XM1W_IklCEvyoVdpFdYdIY1pNJ2KVoWTlM_23HANVx2pFCyophFdT2XZ-LGYF1y-LFG56hfAoSxWUAjqbauhB-jGDYUIOvIVMyy85rfYUDm-pYzPS8gUzXFkwx5ChAMDKzlMPcE0CaydJAX6SHZUG6j07scLEqiJqvInrkoQVmXW72WxwAfYtm1w0YQW_53IgNnOpRjjlewbPkQWkizKpSObjQrrA0LkuQTeVY7NlblhNjj4jMipkegnNokvvKNCwcAMS2XXJ_ocgcjRBCiHwdSNRyO4t2HkTaXJeyUdzSk0pNhwBY3sZL8jk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/notifications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGQ5ZWFhZjlmNDkyMjVkMDAxNGQ4ZTk0NGMwNzczYWI5MTdiMWFhZTY5ZjNjYzNlOTVmMzE1MzU1NmIzN2RmMWY2NjFhOWU0OGFiNzg3NGYiLCJpYXQiOjE2MDE0ODI0MTUsIm5iZiI6MTYwMTQ4MjQxNSwiZXhwIjoxNjA0MDc0NDE0LCJzdWIiOiIzMDciLCJzY29wZXMiOltdfQ.gI530nX7zyD5cex8D2RGHQ0oLZ4HAFVPcmsfzvnTb02r9hfB1zcC2w1YB0k8yn3VlXHYZKZ8OrpY2wOnF15d08EpAhjh9sRScOJ0LyurGf7k8WbQ51A7DZm87kwe0zxKBKaPzeNdiVq2S72E5HNKjmEM91E4EezqJ_y1q5iOwHYnpQ6inyw_IWamJHBDlKgjhZOJ0BXP-o2k3LCvu0dQcLLG5LP7TQndGK1kMz2Oy--QtEbxa0aVxMto6IYxls521yLklJvnKbvTImAmA2FpLVzp8ltC7MCK6hmVE4RJ3J-1etKWKR3gfj4VBAwB4Jx9dXV2jFyVN08rPwn26boBkSOUWv84TCd3zgMeRE9z5OXRbGq948XM1W_IklCEvyoVdpFdYdIY1pNJ2KVoWTlM_23HANVx2pFCyophFdT2XZ-LGYF1y-LFG56hfAoSxWUAjqbauhB-jGDYUIOvIVMyy85rfYUDm-pYzPS8gUzXFkwx5ChAMDKzlMPcE0CaydJAX6SHZUG6j07scLEqiJqvInrkoQVmXW72WxwAfYtm1w0YQW_53IgNnOpRjjlewbPkQWkizKpSObjQrrA0LkuQTeVY7NlblhNjj4jMipkegnNokvvKNCwcAMS2XXJ_ocgcjRBCiHwdSNRyO4t2HkTaXJeyUdzSk0pNhwBY3sZL8jk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"short_text\": \"Notification 1333\",\n    \"long_text\": \"Here the text of the notification\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/notifications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGQ5ZWFhZjlmNDkyMjVkMDAxNGQ4ZTk0NGMwNzczYWI5MTdiMWFhZTY5ZjNjYzNlOTVmMzE1MzU1NmIzN2RmMWY2NjFhOWU0OGFiNzg3NGYiLCJpYXQiOjE2MDE0ODI0MTUsIm5iZiI6MTYwMTQ4MjQxNSwiZXhwIjoxNjA0MDc0NDE0LCJzdWIiOiIzMDciLCJzY29wZXMiOltdfQ.gI530nX7zyD5cex8D2RGHQ0oLZ4HAFVPcmsfzvnTb02r9hfB1zcC2w1YB0k8yn3VlXHYZKZ8OrpY2wOnF15d08EpAhjh9sRScOJ0LyurGf7k8WbQ51A7DZm87kwe0zxKBKaPzeNdiVq2S72E5HNKjmEM91E4EezqJ_y1q5iOwHYnpQ6inyw_IWamJHBDlKgjhZOJ0BXP-o2k3LCvu0dQcLLG5LP7TQndGK1kMz2Oy--QtEbxa0aVxMto6IYxls521yLklJvnKbvTImAmA2FpLVzp8ltC7MCK6hmVE4RJ3J-1etKWKR3gfj4VBAwB4Jx9dXV2jFyVN08rPwn26boBkSOUWv84TCd3zgMeRE9z5OXRbGq948XM1W_IklCEvyoVdpFdYdIY1pNJ2KVoWTlM_23HANVx2pFCyophFdT2XZ-LGYF1y-LFG56hfAoSxWUAjqbauhB-jGDYUIOvIVMyy85rfYUDm-pYzPS8gUzXFkwx5ChAMDKzlMPcE0CaydJAX6SHZUG6j07scLEqiJqvInrkoQVmXW72WxwAfYtm1w0YQW_53IgNnOpRjjlewbPkQWkizKpSObjQrrA0LkuQTeVY7NlblhNjj4jMipkegnNokvvKNCwcAMS2XXJ_ocgcjRBCiHwdSNRyO4t2HkTaXJeyUdzSk0pNhwBY3sZL8jk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"read\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/notifications/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"notifications",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGQ5ZWFhZjlmNDkyMjVkMDAxNGQ4ZTk0NGMwNzczYWI5MTdiMWFhZTY5ZjNjYzNlOTVmMzE1MzU1NmIzN2RmMWY2NjFhOWU0OGFiNzg3NGYiLCJpYXQiOjE2MDE0ODI0MTUsIm5iZiI6MTYwMTQ4MjQxNSwiZXhwIjoxNjA0MDc0NDE0LCJzdWIiOiIzMDciLCJzY29wZXMiOltdfQ.gI530nX7zyD5cex8D2RGHQ0oLZ4HAFVPcmsfzvnTb02r9hfB1zcC2w1YB0k8yn3VlXHYZKZ8OrpY2wOnF15d08EpAhjh9sRScOJ0LyurGf7k8WbQ51A7DZm87kwe0zxKBKaPzeNdiVq2S72E5HNKjmEM91E4EezqJ_y1q5iOwHYnpQ6inyw_IWamJHBDlKgjhZOJ0BXP-o2k3LCvu0dQcLLG5LP7TQndGK1kMz2Oy--QtEbxa0aVxMto6IYxls521yLklJvnKbvTImAmA2FpLVzp8ltC7MCK6hmVE4RJ3J-1etKWKR3gfj4VBAwB4Jx9dXV2jFyVN08rPwn26boBkSOUWv84TCd3zgMeRE9z5OXRbGq948XM1W_IklCEvyoVdpFdYdIY1pNJ2KVoWTlM_23HANVx2pFCyophFdT2XZ-LGYF1y-LFG56hfAoSxWUAjqbauhB-jGDYUIOvIVMyy85rfYUDm-pYzPS8gUzXFkwx5ChAMDKzlMPcE0CaydJAX6SHZUG6j07scLEqiJqvInrkoQVmXW72WxwAfYtm1w0YQW_53IgNnOpRjjlewbPkQWkizKpSObjQrrA0LkuQTeVY7NlblhNjj4jMipkegnNokvvKNCwcAMS2XXJ_ocgcjRBCiHwdSNRyO4t2HkTaXJeyUdzSk0pNhwBY3sZL8jk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/notifications/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"notifications",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGQ5ZWFhZjlmNDkyMjVkMDAxNGQ4ZTk0NGMwNzczYWI5MTdiMWFhZTY5ZjNjYzNlOTVmMzE1MzU1NmIzN2RmMWY2NjFhOWU0OGFiNzg3NGYiLCJpYXQiOjE2MDE0ODI0MTUsIm5iZiI6MTYwMTQ4MjQxNSwiZXhwIjoxNjA0MDc0NDE0LCJzdWIiOiIzMDciLCJzY29wZXMiOltdfQ.gI530nX7zyD5cex8D2RGHQ0oLZ4HAFVPcmsfzvnTb02r9hfB1zcC2w1YB0k8yn3VlXHYZKZ8OrpY2wOnF15d08EpAhjh9sRScOJ0LyurGf7k8WbQ51A7DZm87kwe0zxKBKaPzeNdiVq2S72E5HNKjmEM91E4EezqJ_y1q5iOwHYnpQ6inyw_IWamJHBDlKgjhZOJ0BXP-o2k3LCvu0dQcLLG5LP7TQndGK1kMz2Oy--QtEbxa0aVxMto6IYxls521yLklJvnKbvTImAmA2FpLVzp8ltC7MCK6hmVE4RJ3J-1etKWKR3gfj4VBAwB4Jx9dXV2jFyVN08rPwn26boBkSOUWv84TCd3zgMeRE9z5OXRbGq948XM1W_IklCEvyoVdpFdYdIY1pNJ2KVoWTlM_23HANVx2pFCyophFdT2XZ-LGYF1y-LFG56hfAoSxWUAjqbauhB-jGDYUIOvIVMyy85rfYUDm-pYzPS8gUzXFkwx5ChAMDKzlMPcE0CaydJAX6SHZUG6j07scLEqiJqvInrkoQVmXW72WxwAfYtm1w0YQW_53IgNnOpRjjlewbPkQWkizKpSObjQrrA0LkuQTeVY7NlblhNjj4jMipkegnNokvvKNCwcAMS2XXJ_ocgcjRBCiHwdSNRyO4t2HkTaXJeyUdzSk0pNhwBY3sZL8jk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/notifications/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"notifications",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GetUserDetails",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGQ5ZWFhZjlmNDkyMjVkMDAxNGQ4ZTk0NGMwNzczYWI5MTdiMWFhZTY5ZjNjYzNlOTVmMzE1MzU1NmIzN2RmMWY2NjFhOWU0OGFiNzg3NGYiLCJpYXQiOjE2MDE0ODI0MTUsIm5iZiI6MTYwMTQ4MjQxNSwiZXhwIjoxNjA0MDc0NDE0LCJzdWIiOiIzMDciLCJzY29wZXMiOltdfQ.gI530nX7zyD5cex8D2RGHQ0oLZ4HAFVPcmsfzvnTb02r9hfB1zcC2w1YB0k8yn3VlXHYZKZ8OrpY2wOnF15d08EpAhjh9sRScOJ0LyurGf7k8WbQ51A7DZm87kwe0zxKBKaPzeNdiVq2S72E5HNKjmEM91E4EezqJ_y1q5iOwHYnpQ6inyw_IWamJHBDlKgjhZOJ0BXP-o2k3LCvu0dQcLLG5LP7TQndGK1kMz2Oy--QtEbxa0aVxMto6IYxls521yLklJvnKbvTImAmA2FpLVzp8ltC7MCK6hmVE4RJ3J-1etKWKR3gfj4VBAwB4Jx9dXV2jFyVN08rPwn26boBkSOUWv84TCd3zgMeRE9z5OXRbGq948XM1W_IklCEvyoVdpFdYdIY1pNJ2KVoWTlM_23HANVx2pFCyophFdT2XZ-LGYF1y-LFG56hfAoSxWUAjqbauhB-jGDYUIOvIVMyy85rfYUDm-pYzPS8gUzXFkwx5ChAMDKzlMPcE0CaydJAX6SHZUG6j07scLEqiJqvInrkoQVmXW72WxwAfYtm1w0YQW_53IgNnOpRjjlewbPkQWkizKpSObjQrrA0LkuQTeVY7NlblhNjj4jMipkegnNokvvKNCwcAMS2XXJ_ocgcjRBCiHwdSNRyO4t2HkTaXJeyUdzSk0pNhwBY3sZL8jk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"short_text\": \"sadfsadf1111\",\n    \"long_text\": \"sadfsad111\",\n    \"status\": \"unread\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WikipediaGetArticles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
