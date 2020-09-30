@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->times(100)->state([
-                'password' => Hash::make('password')
+                'password' => Hash::make('password')        //set same password for all generated users, this is for testing
             ])
             ->create();
     }
