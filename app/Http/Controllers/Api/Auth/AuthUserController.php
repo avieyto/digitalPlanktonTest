@@ -3,43 +3,44 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\TokenResource;
+use App\Http\Resources\UserResource;
+use App\Services\Contracts\ITokenService;
+use App\Services\Contracts\IUserRegisterService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class AuthUserController extends Controller
 {
     /**
-     * @param Request $request
+     * @var ITokenService
+     */
+    protected $tokenService;
+
+    public function __construct(ITokenService $tokenService)
+    {
+        $this->tokenService = $tokenService;
+    }
+
+    /**
+     * @param LoginRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
-                'email' => 'required|string|email',
-                'password' => 'required|string'
-            ]);
-
-            if ($validator->fails())
-                return response(['errors' => $validator->errors()->all()], 400);
+            if (!Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')]))
+                return response(['errors' => ['Invalid user credentials']], 401);
 
             /**
              * @var $user User
              */
-            $user = User::query()->where('email', $request->get('email'))->first();
-            if (!$user)
-                return response(['errors' => ['Invalid user credentials']], 401);
+            $user = Auth::user();
 
-            if (!Hash::check($request->get('password'), $user->password))
-                return response(['errors' => ['Invalid user credentials']], 401);
-
-            $token = $user->createToken(env('APP_NAME'))->accessToken;
-
-            return response(['token' => $token, 'user' => $user], 200);
+            $token = $this->tokenService->createTokenByUser($user);
+            return response(['token' => new TokenResource($token)], 200);
         }
         catch (\Throwable $exception) {
             return response(['errors' => [$exception->getMessage()]], 500);
@@ -47,32 +48,21 @@ class AuthUserController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param RegisterRequest $request
+     * @param IUserRegisterService $registerService
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
+    public function register(RegisterRequest $request, IUserRegisterService $registerService)
     {
         try {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:6|confirmed',
-            ]);
+            $user = $registerService->registerUser($request);
 
-            if ($validator->fails())
-                return response(['errors' => $validator->errors()->all()], 400);
+            $token = $this->tokenService->createTokenByUser($user);
 
-            $request['password'] = Hash::make($request->get('password'));
-            $request['remember_token'] = Str::random(15);
+            return response(['token' => new TokenResource($token), 'user' => new UserResource($user)], 200);
 
-            /**
-             * @var $user User
-             */
-            $user = User::factory()->create($request->all(['name', 'email', 'password']));
-            $token = $user->createToken(env('APP_NAME'))->accessToken;
-            return response(['token' => $token], 200);
-
-        } catch (\Throwable $exception) {
+        }
+        catch (\Throwable $exception) {
             return response(['errors' => [$exception->getMessage()]], 500);
         }
     }

@@ -5,13 +5,11 @@ namespace App\Http\Controllers\Api\Notification;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NotificationRequest;
-use App\Http\Resources\NotificationCollection;
 use App\Http\Resources\NotificationResource;
 use App\Models\Notification;
 use App\Models\User;
 use App\Services\NotificationService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class NotificationController extends Controller
 {

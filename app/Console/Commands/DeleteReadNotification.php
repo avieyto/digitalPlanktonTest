@@ -2,25 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Notification;
 use App\Services\Contracts\INotificationService;
 use Illuminate\Console\Command;
 
-class ClearNotification extends Command
+class DeleteReadNotification extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'notification:clear';
+    protected $signature = 'notification:delete';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Clear all notification (set as read)';
+    protected $description = 'Delete all notifications marked as read';
 
     /**
      * @var INotificationService $notificationService
@@ -45,8 +44,8 @@ class ClearNotification extends Command
      */
     public function handle()
     {
-        $countUpdated = $this->notificationService->markAllNotificationsAsRead();
-        $this->output->text($countUpdated . ' notifications marked as read');
-        return $countUpdated;
+        $countedRow = $this->notificationService->deleteAllReadNotifications();
+        $this->output->text($countedRow . ' notifications deleted');
+        return $countedRow;
     }
 }
