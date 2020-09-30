@@ -22,6 +22,12 @@ Using Laravel/Passport, the following functionalities are available
 - Need install Laravel/Passport and run the migration and install command. [Laravel Passport Documentation](https://laravel.com/docs/8.x/passport)
 - Only one <strong>test unit</strong> was created. 
 
+# Steps for make app works
+- Download code from git repo https://github.com/avieyto/digitalPlanktonTest.git
+- Run composer install to install Laravel Project and Dependencies
+- Run php artisan migrate
+- Run php artisan passport:install
+
 # Postman file content
 
 The post man file contain a set of endpoints to test the app.
