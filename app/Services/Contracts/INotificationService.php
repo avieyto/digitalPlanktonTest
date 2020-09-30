@@ -3,6 +3,8 @@
 
 namespace App\Services\Contracts;
 
+use App\Http\Requests\CreateNotificationRequest;
+use App\Http\Requests\UpdateNotificationRequest;
 use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,12 +23,20 @@ interface INotificationService
     function getNotificationsByUser(User $user);
 
     /**
-     * Create an store a notification
-     * @param $attributes
+     * Create and store a notification
+     * @param CreateNotificationRequest $createNotificationRequest
      * @param User $user
      * @return Notification
      */
-    function storeNotification($attributes, User $user);
+    function storeNotification(CreateNotificationRequest $createNotificationRequest, User $user);
+
+    /**
+     * Update a notification
+     * @param UpdateNotificationRequest $updateNotificationRequest
+     * @param Notification $notification
+     * @return Notification
+     */
+    function updateNotification(UpdateNotificationRequest $updateNotificationRequest, Notification $notification);
 
     /**
      * Mark all notifications as read, return the number of notification updated

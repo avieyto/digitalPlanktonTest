@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NotificationRequest extends FormRequest
+class CreateNotificationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,7 @@ class NotificationRequest extends FormRequest
     {
         return [
             'short_text' => 'required|string|max:250',
-            'long_text' => 'required|string',
-            'status' => 'required|string'
+            'long_text' => 'required|string'
         ];
     }
 }

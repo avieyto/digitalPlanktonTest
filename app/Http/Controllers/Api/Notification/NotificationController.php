@@ -4,18 +4,30 @@ namespace App\Http\Controllers\Api\Notification;
 
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\NotificationRequest;
+use App\Http\Requests\CreateNotificationRequest;
+use App\Http\Requests\UpdateNotificationRequest;
 use App\Http\Resources\NotificationResource;
 use App\Models\Notification;
 use App\Models\User;
+use App\Services\Contracts\INotificationService;
 use App\Services\NotificationService;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
     /**
+     * @var INotificationService $notificationService
+     */
+    protected $notificationService;
+
+    public function __construct(INotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
+
+    /**
      * @param Request $request
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Resources\Json\AnonymousResourceCollection|\Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -24,7 +36,8 @@ class NotificationController extends Controller
              * @var $user User
              */
             $user = $request->user();
-            return NotificationResource::collection(NotificationService::getNotificationByUser($user));
+            $notifications = $this->notificationService->getNotificationsByUser($user);
+            return NotificationResource::collection($notifications);
         }
         catch (\Throwable $exception) {
             return response(['errors' => [$exception->getMessage()]], 500);
@@ -32,35 +45,30 @@ class NotificationController extends Controller
     }
 
     /**
-     * @param NotificationRequest $request
-     * @return \Illuminate\Http\Response
+     * @param CreateNotificationRequest $request
+     * @return NotificationResource|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function store(NotificationRequest $request)
+    public function store(CreateNotificationRequest $request)
     {
         try {
-            $input = $request->validated();
-
             /**
              * @var $user User
              */
             $user = $request->user();
 
-            if (!$input)
-                return response(['errors' => ['Incorrect request']], 400);
-
-            $notification = NotificationService::storeNotification($input, $user);
+            $notification = $this->notificationService->storeNotification($request, $user);
             return new NotificationResource($notification);
         }
         catch(\Throwable $exception) {
-            return response(['errors' => [$exception->getMessage()]], 500);
+            $code = $exception->getCode() > 0 ? $exception->getCode() : 500;
+            return response(['errors' => [$exception->getMessage()]], $code);
         }
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Notification  $notification
-     * @return \Illuminate\Http\Response
+     * @param Notification $notification
+     * @param Request $request
+     * @return NotificationResource|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function show(Notification $notification, Request $request)
     {
@@ -81,13 +89,11 @@ class NotificationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  NotificationRequest  $request
-     * @param  \App\Models\Notification  $notification
-     * @return \Illuminate\Http\Response
+     * @param UpdateNotificationRequest $request
+     * @param Notification $notification
+     * @return NotificationResource|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function update(NotificationRequest $request, Notification $notification)
+    public function update(UpdateNotificationRequest $request, Notification $notification)
     {
         try {
             /**
@@ -97,11 +103,7 @@ class NotificationController extends Controller
             if ($notification->user_id != $user->id)
                 throw new \Exception('Unauthorized access', 401);
 
-            $notification->setAttribute('short_text', $request->short_text);
-            $notification->setAttribute('long_text', $request->long_text);
-            $notification->setAttribute('status', $request->status);
-            $notification->save();
-
+            $notification = $this->notificationService->updateNotification($request, $notification);
             return new NotificationResource($notification);
         }
         catch (\Throwable $exception) {
@@ -111,10 +113,9 @@ class NotificationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Notification  $notification
-     * @return \Illuminate\Http\Response
+     * @param Notification $notification
+     * @param Request $request
+     * @return NotificationResource|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function destroy(Notification $notification, Request $request)
     {
